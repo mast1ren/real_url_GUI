@@ -1,0 +1,63 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>297e84f6-e1eb-45a6-af98-af40e6739842</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>real_url_GUI.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>real_url_GUI</Name>
+    <RootNamespace>real_url_GUI</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="main_UI.py" />
+    <Compile Include="real_url\bilibili.py" />
+    <Compile Include="real_url\chushou.py" />
+    <Compile Include="real_url\douyin.py" />
+    <Compile Include="real_url\douyu.py" />
+    <Compile Include="real_url\egame-qq.py" />
+    <Compile Include="real_url\huajiao.py" />
+    <Compile Include="real_url\huomao.py" />
+    <Compile Include="real_url\huya.py" />
+    <Compile Include="real_url\iqiyi.py" />
+    <Compile Include="real_url\kuaishou.py" />
+    <Compile Include="real_url\kugou.py" />
+    <Compile Include="real_url\longzhu.py" />
+    <Compile Include="real_url\now.py" />
+    <Compile Include="real_url\pps.py" />
+    <Compile Include="real_url\v6cn.py" />
+    <Compile Include="real_url\wangyi-cc.py" />
+    <Compile Include="real_url\xigua.py" />
+    <Compile Include="real_url\yingke.py" />
+    <Compile Include="real_url\yizhibo.py" />
+    <Compile Include="real_url\yy.py" />
+    <Compile Include="real_url\zhanqi.py" />
+    <Compile Include="real_url_GUI.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="real_url\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="real_url\iqiyi.js" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>
