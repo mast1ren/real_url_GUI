@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import sys
-sys.path.append(r'.\real_url')
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from main_UI import Ui_MainWindow
 import re
-import douyu
-import huya
+from real_url import *
 
 class Interface(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
@@ -17,58 +15,26 @@ class Interface(QMainWindow, Ui_MainWindow):
         self.getUrlButton.clicked.connect(self.getUrl)
         self.roomID.textChanged.connect(self.ridStatusChange)
 
+    urlByPlatform = {'斗鱼':douyu.get_real_url, '虎牙':huya.get_real_url, 'Bilibili':bilibili.get_real_url,
+                     '触手':chushou.get_real_url, '抖音':douyin.get_real_url, '企鹅电竞':egame_qq.get_real_url,
+                     '花椒':huajiao.get_real_url, '火猫':huomao.get_real_url, '爱奇艺':iqiyi.get_real_url,
+                     '快手':kuaishou.get_real_url, '酷狗':kugou.get_real_url, '龙珠':longzhu.get_real_url,
+                     'NOW':now.get_real_url, 'pps':pps.get_real_url, '六间房':v6cn.get_real_url,
+                     '网易CC':wangyi_cc.get_real_url, '西瓜':xigua.get_real_url, '映客':yingke.get_real_url,
+                     '一直播"':yizhibo.get_real_url, 'YY':yy.get_real_url, '战旗':zhanqi.get_real_url}
+
     def getUrl(self):
         platform = self.comboBox.currentText()
         rid = self.roomID.text()
-        if platform == '斗鱼':
-            realUrl = douyu.get_real_url(rid)
-        elif platform == '虎牙':
-            realUrl = huya.get_real_url(rid)
-        #elif platform == 'Bilibili':
 
-        #elif platform == '触手':
-
-        #elif platform == '抖音':
-
-        #elif platform == '企鹅电竞':
-
-        #elif platform == '花椒':
-
-        #elif platform == '火猫':
-
-        #elif platform == '爱奇艺':
-
-        #elif platform == '快手':
-
-        #elif platform == '酷狗':
-
-        #elif platform == '龙珠':
-
-        #elif platform == 'NOW':
-
-        #elif platform == 'pps':
-
-        #elif platform == '六间房':
-
-        #elif platform == '网易CC':
-
-        #elif platform == '西瓜':
-
-        #elif platform == '映客':
-
-        #elif platform == '一直播':
-
-        #elif platform == 'YY':
-
-        #elif platform == '战旗':
-
+        realUrl = self.urlByPlatform[platform](rid)
 
         zh = "".join(re.compile('[^\u4e00-\u9fa5]').split(realUrl)).strip()
         
         if zh != realUrl:
             clipboard = QApplication.clipboard()
             clipboard.setText(realUrl)
-            QMessageBox.information(self, '完成', '直播地址已复制')
+            #QMessageBox.information(self, '完成', '直播地址已复制')
         else:
             QMessageBox.information(self, '完成', '获取地址错误')
 

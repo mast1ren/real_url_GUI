@@ -24,6 +24,6 @@ def get_real_url(rid):
     return real_url
 
 
-rid = input('请输入YY直播房间号：\n')
-real_url = get_real_url(rid)
-print('该直播间源地址为：\n' + real_url)
+#rid = input('请输入YY直播房间号：\n')
+#real_url = get_real_url(rid)
+#print('该直播间源地址为：\n' + real_url)

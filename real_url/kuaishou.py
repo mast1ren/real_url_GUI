@@ -19,7 +19,7 @@ def get_real_url(rid):
     return real_url
 
 
-rid = input('请输入快手直播间ID：\n')
-real_url = get_real_url(rid)
-print('该直播源地址为：')
-print(real_url)
+#rid = input('请输入快手直播间ID：\n')
+#real_url = get_real_url(rid)
+#print('该直播源地址为：')
+#print(real_url)

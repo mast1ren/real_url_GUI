@@ -26,7 +26,7 @@
     <Compile Include="real_url\chushou.py" />
     <Compile Include="real_url\douyin.py" />
     <Compile Include="real_url\douyu.py" />
-    <Compile Include="real_url\egame-qq.py" />
+    <Compile Include="real_url\egame_qq.py" />
     <Compile Include="real_url\huajiao.py" />
     <Compile Include="real_url\huomao.py" />
     <Compile Include="real_url\huya.py" />
@@ -37,12 +37,15 @@
     <Compile Include="real_url\now.py" />
     <Compile Include="real_url\pps.py" />
     <Compile Include="real_url\v6cn.py" />
-    <Compile Include="real_url\wangyi-cc.py" />
+    <Compile Include="real_url\wangyi_cc.py" />
     <Compile Include="real_url\xigua.py" />
     <Compile Include="real_url\yingke.py" />
     <Compile Include="real_url\yizhibo.py" />
     <Compile Include="real_url\yy.py" />
     <Compile Include="real_url\zhanqi.py" />
+    <Compile Include="real_url\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="real_url_GUI.py" />
   </ItemGroup>
   <ItemGroup>

@@ -34,9 +34,9 @@ def get_status(room_url):
     return status
 
 
-rid = input('请输入一直播房间地址：\n')
-status = get_status(rid)
-print('当前直播状态', status)
-real_url = get_real_url(rid)
-print('该直播间源地址为：')
-print(real_url)
+#rid = input('请输入一直播房间地址：\n')
+#status = get_status(rid)
+#print('当前直播状态', status)
+#real_url = get_real_url(rid)
+#print('该直播间源地址为：')
+#print(real_url)

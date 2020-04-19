@@ -42,7 +42,7 @@ def get_real_url(rid):
 
 
 
-rid = input('请输入爱奇艺直播间id：\n') # 如：19732
-real_url = get_real_url(rid)
-print('该直播间源地址为：')
-print(real_url)
+#rid = input('请输入爱奇艺直播间id：\n') # 如：19732
+#real_url = get_real_url(rid)
+#print('该直播间源地址为：')
+#print(real_url)
