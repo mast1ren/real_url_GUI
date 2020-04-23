@@ -7,6 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -113,13 +114,6 @@ class Ui_MainWindow(object):
         self.gridLayout.setColumnStretch(0, 7)
         self.verticalLayout_2.addLayout(self.gridLayout)
         MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 319, 23))
-        self.menubar.setObjectName("menubar")
-        self.menu = QtWidgets.QMenu(self.menubar)
-        self.menu.setObjectName("menu")
-        MainWindow.setMenuBar(self.menubar)
-        self.menubar.addAction(self.menu.menuAction())
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -134,8 +128,8 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "房间号"))
         item = self.selectedList.horizontalHeaderItem(2)
         item.setText(_translate("MainWindow", "直链"))
-        self.menu.setTitle(_translate("MainWindow", "关于"))
         reg = QtCore.QRegExp('[0-9]*')
         self.roomID.setValidator(QtGui.QRegExpValidator(reg, self))
         self.selectedList.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.selectedList.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.setWindowIcon(QtGui.QIcon(':/realurlGUI.ico'))

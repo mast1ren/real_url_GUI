@@ -22,6 +22,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="main_UI.py" />
+    <Compile Include="rc.py" />
     <Compile Include="real_url\bilibili.py" />
     <Compile Include="real_url\chushou.py" />
     <Compile Include="real_url\douyin.py" />

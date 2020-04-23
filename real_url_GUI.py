@@ -6,6 +6,8 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QTableWidget
 from main_UI import Ui_MainWindow
 import re
 from real_url import *
+import logging
+import time
 
 class Interface(QMainWindow, Ui_MainWindow):
     urlByPlatform = {'斗鱼':douyu.get_real_url, '虎牙':huya.get_real_url, 'Bilibili':bilibili.get_real_url,
@@ -28,16 +30,24 @@ class Interface(QMainWindow, Ui_MainWindow):
 
     def getUrl(self):
         platform = self.comboBox.currentText()
+        logging.info('get stream platform')
         rid = self.roomID.text()
-
-        realUrl = self.urlByPlatform[platform](rid)
-
-        textOnlyCHN = "".join(re.compile('[^\u4e00-\u9fa5]').split(realUrl)).strip()
-        
-        if textOnlyCHN != realUrl:
-            self.updataSelectList(platform, rid, realUrl)
+        logging.info('get room id')
+        try:
+            realUrl = self.urlByPlatform[platform](rid)
+            logging.info('get real url')
+        except:
+            QMessageBox.warning(self, '错误', '0 获取链接错误')
+            logging.error('error occur when getting real url')
         else:
-            QMessageBox.information(self, '失败', '获取地址错误')
+            textOnlyCHN = "".join(re.compile('[^\u4e00-\u9fa5]').split(realUrl)).strip()
+            logging.info('match Chinese unicode')
+            if textOnlyCHN != realUrl:
+                self.updataSelectList(platform, rid, realUrl)
+                logging.info('update url info')
+            else:
+                QMessageBox.information(self, '失败', '1 获取地址失败')
+                logging.warning('failed to get url')
 
     def ridStatusChange(self):
         if len(self.roomID.text()) == 0:
@@ -56,11 +66,14 @@ class Interface(QMainWindow, Ui_MainWindow):
         clipboard = QApplication.clipboard()
         try:
             clipboard.setText(realUrl)
+            logging.info('copy url')
         except WindowsError:
-            QMessageBox.worning(self, '失败', 'error 3:复制到剪切板失败')
+            QMessageBox.warning(self, '错误', '2 复制到剪切板失败')
+            logging.error('failed to copy url')
 
     def deleteItem(self):
         self.selectedList.removeRow(self.selectedList.currentRow())
+        logging.info('delete url info')
 
     def updataSelectList(self, platform, rid, url):
         roomInfo = [platform, rid, url]
@@ -72,26 +85,33 @@ class Interface(QMainWindow, Ui_MainWindow):
 
     def exportUrl(self):
         try:
-            realUrlFile = open("realUrl.dpl", "w", encoding="utf-8", errors=2)
+            realUrlFile = open("realUrl.dpl", "w", encoding="utf-8", errors=Warning)
+            logging.info('create or open realUrl.dpl file')
             realUrlFile.write("DAUMPLAYLIST\ntopindex=0\nsaveplaypos=0\n")
+            logging.info('write in realUrl.dpl')
             rowCount = self.selectedList.rowCount()
             for i in range(rowCount):
                 realUrlFile.write(str(i + 1) + "*file*" + self.selectedList.item(i, 2).text() + '\n')
                 realUrlFile.write(str(i + 1) + "*title*" + self.selectedList.item(i, 0).text() + '-' + self.selectedList.item(i, 1).text() + '\n')
                 realUrlFile.write(str(i + 1) + "*played*0\n")
+            logging.info('write in reaUrl.dpl')
         except IOError:
-            QMessageBox.worning(self, '失败', 'error 0:读取或写入文件失败')
+            QMessageBox.error(self, '失败', '3 读取或写入文件失败')
+            logging.error('failed to open or write file')
         except UnicodeError:
-            QMessageBox.worning(self, '失败', 'error 1:编码错误')
+            QMessageBox.warning(self, '失败', '4 编码错误')
+            logging.error('encoding error')
         except:
-            QMessageBox.worning(self, '失败', 'error 2:未知错误')
+            QMessageBox.error(self, '错误', '5 未知错误')
+            logging.error('unknown error')
         else:
             QMessageBox.information(self, '完成', '已经导出文件')
+            logging.info('export complete')
             realUrlFile.close()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-
+    logging.basicConfig(filename = 'info.log', filemode = 'a', format='%(asctime)s %(levelname)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level = logging.INFO)
     real_url_GUI = Interface()
     real_url_GUI.show()
 
