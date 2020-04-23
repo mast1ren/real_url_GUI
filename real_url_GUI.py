@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 import sys
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QTableWidgetItem
 from main_UI import Ui_MainWindow
 import re

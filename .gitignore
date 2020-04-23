@@ -12,7 +12,6 @@
 *.ui
 *.log
 *.qrc
-*.dpl
 /build
 /dist
 *.spec
