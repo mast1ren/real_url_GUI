@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import sys
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
@@ -25,6 +24,7 @@ class Interface(QMainWindow, Ui_MainWindow):
         self.selectedList.itemChanged.connect(self.exportStatusChange)
         self.selectedList.itemClicked.connect(self.urlCopy)
         self.selectedList.itemDoubleClicked.connect(self.deleteItem)
+        self.exportButton.clicked.connect(self.exportUrl)
 
     def getUrl(self):
         platform = self.comboBox.currentText()
@@ -37,7 +37,7 @@ class Interface(QMainWindow, Ui_MainWindow):
         if textOnlyCHN != realUrl:
             self.updataSelectList(platform, rid, realUrl)
         else:
-            QMessageBox.information(self, '完成', '获取地址错误')
+            QMessageBox.information(self, '失败', '获取地址错误')
 
     def ridStatusChange(self):
         if len(self.roomID.text()) == 0:
@@ -54,7 +54,10 @@ class Interface(QMainWindow, Ui_MainWindow):
     def urlCopy(self):
         realUrl = self.selectedList.item(self.selectedList.currentRow(), 2).text()
         clipboard = QApplication.clipboard()
-        clipboard.setText(realUrl)
+        try:
+            clipboard.setText(realUrl)
+        except WindowsError:
+            QMessageBox.worning(self, '失败', 'error 3:复制到剪切板失败')
 
     def deleteItem(self):
         self.selectedList.removeRow(self.selectedList.currentRow())
@@ -67,7 +70,24 @@ class Interface(QMainWindow, Ui_MainWindow):
         self.selectedList.setItem(row, 1, QTableWidgetItem(str(roomInfo[1])))
         self.selectedList.setItem(row, 2, QTableWidgetItem(str(roomInfo[2])))
 
-
+    def exportUrl(self):
+        try:
+            realUrlFile = open("realUrl.dpl", "w", encoding="utf-8", errors=2)
+            realUrlFile.write("DAUMPLAYLIST\ntopindex=0\nsaveplaypos=0\n")
+            rowCount = self.selectedList.rowCount()
+            for i in range(rowCount):
+                realUrlFile.write(str(i + 1) + "*file*" + self.selectedList.item(i, 2).text() + '\n')
+                realUrlFile.write(str(i + 1) + "*title*" + self.selectedList.item(i, 0).text() + '-' + self.selectedList.item(i, 1).text() + '\n')
+                realUrlFile.write(str(i + 1) + "*played*0\n")
+        except IOError:
+            QMessageBox.worning(self, '失败', 'error 0:读取或写入文件失败')
+        except UnicodeError:
+            QMessageBox.worning(self, '失败', 'error 1:编码错误')
+        except:
+            QMessageBox.worning(self, '失败', 'error 2:未知错误')
+        else:
+            QMessageBox.information(self, '完成', '已经导出文件')
+            realUrlFile.close()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
