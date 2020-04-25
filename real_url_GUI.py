@@ -3,7 +3,7 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QTableWidgetItem
 from main_UI import Ui_MainWindow
 import re
-from real_url import *
+from real_url import bilibili, chushou, douyin, douyu, egame_qq, huajiao, huomao, huya, iqiyi, kuaishou, kugou, longzhu, now, pps, v6cn, wangyi_cc, xigua, yingke, yizhibo, yy, zhanqi
 import logging
 import time
 

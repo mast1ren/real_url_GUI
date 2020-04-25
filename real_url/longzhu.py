@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # 获取龙珠直播的真实流媒体地址，默认最高码率。
 
 import requests

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # 获取火猫直播的真实流媒体地址,默认为最高画质.
 # 获取的流媒体地址如:http://live-lx-hdl.huomaotv.cn/live/qvCESZ?t=1573928152&r=377789475848&stream=qvCESZ&rid=oubvc2y3v&token=44a7f115f0af496e268bcbb7cdbb63b1&url=http%3A%2F%2Flive-lx-hdl.huomaotv.cn%2Flive%2FqvCESZ&from=huomaoh5room
 # 实际上使用http://live-lx-hdl.huomaotv.cn/live/qvCESZ?token=44a7f115f0af496e268bcbb7cdbb63b1,即可播放

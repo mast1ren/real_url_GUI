@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # 获取PPS奇秀直播的真实流媒体地址。
 
 import requests

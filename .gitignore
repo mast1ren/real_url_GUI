@@ -15,6 +15,7 @@
 /build
 /dist
 *.spec
+*.dpl
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
