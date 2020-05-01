@@ -3,7 +3,7 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QTableWidgetItem
 from main_UI import Ui_MainWindow
 import re
-from real_url import bilibili, chushou, douyin, douyu, egame_qq, huajiao, huomao, huya, iqiyi, kuaishou, kugou, longzhu, now, pps, v6cn, wangyi_cc, xigua, yingke, yizhibo, yy, zhanqi
+from real_url import _17live, bilibili, chushou, douyin, douyu, egame_qq, huajiao, huomao, huya, iqiyi, kuaishou, kugou, longzhu, now, pps, v6cn, wangyi_cc, xigua, yingke, yizhibo, yy, zhanqi
 import logging
 import time
 
@@ -14,7 +14,7 @@ class Interface(QMainWindow, Ui_MainWindow):
                      '快手':kuaishou.get_real_url, '酷狗':kugou.get_real_url, '龙珠':longzhu.get_real_url,
                      'NOW':now.get_real_url, 'pps':pps.get_real_url, '六间房':v6cn.get_real_url,
                      '网易CC':wangyi_cc.get_real_url, '西瓜':xigua.get_real_url, '映客':yingke.get_real_url,
-                     '一直播"':yizhibo.get_real_url, 'YY':yy.get_real_url, '战旗':zhanqi.get_real_url}
+                     '一直播"':yizhibo.get_real_url, 'YY':yy.get_real_url, '战旗':zhanqi.get_real_url, '17live':_17live.get_real_url}
 
     def __init__(self, parent=None):
         super(Interface, self).__init__(parent)
@@ -33,10 +33,10 @@ class Interface(QMainWindow, Ui_MainWindow):
         logging.info('get room id')
         try:
             realUrl = self.urlByPlatform[platform](rid)
-            logging.info('get real url')
+            logging.info('get ' + platform + ' real url')
         except:
             QMessageBox.warning(self, '错误', '0 获取链接错误')
-            logging.error('error occur when getting real url')
+            logging.error('error occur when getting ' + platform + ' real url')
         else:
             textOnlyCHN = "".join(re.compile('[^\u4e00-\u9fa5]').split(realUrl)).strip()
             logging.info('match Chinese unicode')
@@ -83,24 +83,24 @@ class Interface(QMainWindow, Ui_MainWindow):
 
     def exportUrl(self):
         try:
-            realUrlFile = open("realUrl.dpl", "w", encoding="utf-8", errors=Warning)
+            realUrlFile = open("realUrl.dpl", "w", encoding="utf-8")
             logging.info('create or open realUrl.dpl file')
             realUrlFile.write("DAUMPLAYLIST\ntopindex=0\nsaveplaypos=0\n")
-            logging.info('write in realUrl.dpl')
+            logging.info('write title in realUrl.dpl')
             rowCount = self.selectedList.rowCount()
             for i in range(rowCount):
                 realUrlFile.write(str(i + 1) + "*file*" + self.selectedList.item(i, 2).text() + '\n')
                 realUrlFile.write(str(i + 1) + "*title*" + self.selectedList.item(i, 0).text() + '-' + self.selectedList.item(i, 1).text() + '\n')
                 realUrlFile.write(str(i + 1) + "*played*0\n")
-            logging.info('write in reaUrl.dpl')
+            logging.info('write information in realUrl.dpl')
         except IOError:
-            QMessageBox.error(self, '失败', '3 读取或写入文件失败')
+            QMessageBox.warning(self, '失败', '3 读取或写入文件失败')
             logging.error('failed to open or write file')
         except UnicodeError:
             QMessageBox.warning(self, '失败', '4 编码错误')
             logging.error('encoding error')
         except:
-            QMessageBox.error(self, '错误', '5 未知错误')
+            QMessageBox.warning(self, '错误', '5 未知错误')
             logging.error('unknown error')
         else:
             QMessageBox.information(self, '完成', '已经导出文件')

@@ -23,6 +23,7 @@
   <ItemGroup>
     <Compile Include="main_UI.py" />
     <Compile Include="rc.py" />
+    <Compile Include="real_url\_17live.py" />
     <Compile Include="real_url\bilibili.py" />
     <Compile Include="real_url\chushou.py" />
     <Compile Include="real_url\douyin.py" />
@@ -44,9 +45,6 @@
     <Compile Include="real_url\yizhibo.py" />
     <Compile Include="real_url\yy.py" />
     <Compile Include="real_url\zhanqi.py" />
-    <Compile Include="real_url\__init__.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="real_url_GUI.py" />
   </ItemGroup>
   <ItemGroup>
