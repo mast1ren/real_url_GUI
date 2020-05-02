@@ -23,6 +23,7 @@
   <ItemGroup>
     <Compile Include="main_UI.py" />
     <Compile Include="rc.py" />
+    <Compile Include="real_url\laifeng.py" />
     <Compile Include="real_url\_17live.py" />
     <Compile Include="real_url\bilibili.py" />
     <Compile Include="real_url\chushou.py" />

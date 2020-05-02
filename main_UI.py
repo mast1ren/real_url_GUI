@@ -55,6 +55,7 @@ class Ui_MainWindow(object):
         self.comboBox.addItem("YY")
         self.comboBox.addItem("战旗")
         self.comboBox.addItem("17live")
+        self.comboBox.addItem("来疯")
         self.horizontalLayout.addWidget(self.comboBox)
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_4.setSpacing(10)

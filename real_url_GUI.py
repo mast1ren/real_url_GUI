@@ -3,7 +3,7 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QTableWidgetItem
 from main_UI import Ui_MainWindow
 import re
-from real_url import _17live, bilibili, chushou, douyin, douyu, egame_qq, huajiao, huomao, huya, iqiyi, kuaishou, kugou, longzhu, now, pps, v6cn, wangyi_cc, xigua, yingke, yizhibo, yy, zhanqi
+from real_url import laifeng, _17live, bilibili, chushou, douyin, douyu, egame_qq, huajiao, huomao, huya, iqiyi, kuaishou, kugou, longzhu, now, pps, v6cn, wangyi_cc, xigua, yingke, yizhibo, yy, zhanqi
 import logging
 import time
 
@@ -14,7 +14,8 @@ class Interface(QMainWindow, Ui_MainWindow):
                      '快手':kuaishou.get_real_url, '酷狗':kugou.get_real_url, '龙珠':longzhu.get_real_url,
                      'NOW':now.get_real_url, 'pps':pps.get_real_url, '六间房':v6cn.get_real_url,
                      '网易CC':wangyi_cc.get_real_url, '西瓜':xigua.get_real_url, '映客':yingke.get_real_url,
-                     '一直播"':yizhibo.get_real_url, 'YY':yy.get_real_url, '战旗':zhanqi.get_real_url, '17live':_17live.get_real_url}
+                     '一直播"':yizhibo.get_real_url, 'YY':yy.get_real_url, '战旗':zhanqi.get_real_url, 
+                     '17live':_17live.get_real_url, '来疯':laifeng.get_real_url}
 
     def __init__(self, parent=None):
         super(Interface, self).__init__(parent)
