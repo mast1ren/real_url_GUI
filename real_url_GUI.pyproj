@@ -47,6 +47,9 @@
     <Compile Include="real_url\yy.py" />
     <Compile Include="real_url\zhanqi.py" />
     <Compile Include="real_url_GUI.py" />
+    <Compile Include="UI.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="real_url\" />

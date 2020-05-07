@@ -1,21 +1,17 @@
 # -*- coding: utf-8 -*-
-import sys
+import sys, logging, time, importlib, UI, re
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QTableWidgetItem
 from main_UI import Ui_MainWindow
-import re
-from real_url import laifeng, _17live, bilibili, chushou, douyin, douyu, egame_qq, huajiao, huomao, huya, iqiyi, kuaishou, kugou, longzhu, now, pps, v6cn, wangyi_cc, xigua, yingke, yizhibo, yy, zhanqi
-import logging
-import time
 
 class Interface(QMainWindow, Ui_MainWindow):
-    urlByPlatform = {'斗鱼':douyu.get_real_url, '虎牙':huya.get_real_url, 'Bilibili':bilibili.get_real_url,
-                     '触手':chushou.get_real_url, '抖音':douyin.get_real_url, '企鹅电竞':egame_qq.get_real_url,
-                     '花椒':huajiao.get_real_url, '火猫':huomao.get_real_url, '爱奇艺':iqiyi.get_real_url,
-                     '快手':kuaishou.get_real_url, '酷狗':kugou.get_real_url, '龙珠':longzhu.get_real_url,
-                     'NOW':now.get_real_url, 'pps':pps.get_real_url, '六间房':v6cn.get_real_url,
-                     '网易CC':wangyi_cc.get_real_url, '西瓜':xigua.get_real_url, '映客':yingke.get_real_url,
-                     '一直播"':yizhibo.get_real_url, 'YY':yy.get_real_url, '战旗':zhanqi.get_real_url, 
-                     '17live':_17live.get_real_url, '来疯':laifeng.get_real_url}
+    urlByPlatform = {'斗鱼':'douyu', '虎牙':'huya', 'Bilibili':'bilibili',
+                     '触手':'chushou', '抖音':'douyin', '企鹅电竞':'egame_qq',
+                     '花椒':'huajiao', '火猫':'huomao', '爱奇艺':'iqiyi',
+                     '快手':'kuaishou', '酷狗':'kugou', '龙珠':'longzhu',
+                     'NOW':'now', 'pps':'pps', '六间房':'v6cn',
+                     '网易CC':'wangyi_cc', '西瓜':'xigua', '映客':'yingke',
+                     '一直播"':'yizhibo', 'YY':'yy', '战旗':'zhanqi', 
+                     '17live':'_17live', '来疯':'laifeng'}
 
     def __init__(self, parent=None):
         super(Interface, self).__init__(parent)
@@ -32,8 +28,16 @@ class Interface(QMainWindow, Ui_MainWindow):
         logging.info('get stream platform')
         rid = self.roomID.text()
         logging.info('get room id')
+        mod = self.urlByPlatform[platform]
+
         try:
-            realUrl = self.urlByPlatform[platform](rid)
+            fun = importlib.import_module('..' + mod, 'real_url.subpkg')
+            logging.info('import ' + mod + ' mod')
+        except:
+            logging.error('import failed!')
+            QMessageBox.warning(self, '错误', '6 导入模块错误')
+        try:
+            realUrl = fun.get_real_url(rid)
             logging.info('get ' + platform + ' real url')
         except:
             QMessageBox.warning(self, '错误', '0 获取链接错误')
